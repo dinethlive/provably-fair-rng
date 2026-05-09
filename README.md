@@ -27,8 +27,8 @@ The operator literally cannot change an outcome after the fact without breaking 
 
 ## Live demo
 
-- **Verifier UI**, [open the live site](#) (deploy yours via Cloudflare Pages / Vercel)
-- **API**, run locally, see Quick start
+- **Verifier UI**: <https://dinethlive.github.io/provably-fair-rng/>
+- **API**: run locally (see Quick start). The API is a server and is not hosted on GitHub Pages; deploy it to Cloudflare Workers, Render, Fly, or your own VPS.
 
 ## Quick start
 
