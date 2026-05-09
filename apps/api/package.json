@@ -1,0 +1,29 @@
+{
+  "name": "@pf/api",
+  "version": "0.1.0",
+  "description": "Regulatory and operational REST API for the Provably Fair RNG engine. OpenAPI 3.1, API-key authenticated.",
+  "type": "module",
+  "main": "./dist/server.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "node --watch --import tsx src/server.ts",
+    "start": "node dist/server.js",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@pf/rng-core": "workspace:*",
+    "@pf/seed-lifecycle": "workspace:*",
+    "hono": "^4.6.0",
+    "@hono/node-server": "^1.13.0",
+    "@hono/zod-openapi": "^0.18.0",
+    "zod": "^3.24.0",
+    "pino": "^9.5.0",
+    "pino-http": "^10.3.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "vitest": "^2.0.0",
+    "typescript": "^5.9.0"
+  }
+}
