@@ -1,0 +1,35 @@
+{
+  "name": "@pf/rng-core",
+  "version": "0.1.0",
+  "description": "Provably Fair RNG core: HMAC-SHA256 byte stream, rejection-sampling mappers, game-type specifications.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./mappers": {
+      "types": "./dist/mappers/index.d.ts",
+      "import": "./dist/mappers/index.js"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:stat": "vitest run --testTimeout=120000 test/distribution.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@noble/hashes": "^2.0.0"
+  },
+  "devDependencies": {
+    "vitest": "^2.0.0",
+    "fast-check": "^3.23.0",
+    "simple-statistics": "^7.8.0",
+    "typescript": "^5.9.0"
+  }
+}
