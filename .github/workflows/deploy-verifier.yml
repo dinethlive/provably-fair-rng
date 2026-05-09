@@ -1,0 +1,63 @@
+name: Deploy verifier to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build rng-core (verifier dependency)
+        run: pnpm --filter @pf/rng-core build
+
+      - name: Build verifier
+        run: pnpm --filter @pf/verifier build
+        env:
+          BASE_PATH: /provably-fair-rng/
+
+      # SPA routing on GitHub Pages: any deep link 404s by default.
+      # Copying index.html to 404.html makes Pages serve the SPA shell on
+      # every path; React Router then takes over client-side.
+      - name: Make 404.html for SPA fallback
+        run: cp apps/verifier/dist/index.html apps/verifier/dist/404.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/verifier/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

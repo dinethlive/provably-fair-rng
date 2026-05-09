@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build rng-core
+        run: pnpm --filter @pf/rng-core build
+
+      - name: Build seed-lifecycle
+        run: pnpm --filter @pf/seed-lifecycle build
+
+      - name: Typecheck all
+        run: pnpm -r typecheck
+
+      - name: Test rng-core (fast)
+        run: pnpm --filter @pf/rng-core exec vitest run --exclude '**/distribution.test.ts'
+
+      - name: Test seed-lifecycle
+        run: pnpm --filter @pf/seed-lifecycle test
+
+      - name: Test api
+        run: pnpm --filter @pf/api test
+
+      - name: Test verifier
+        run: pnpm --filter @pf/verifier test
+
+  statistical:
+    name: Statistical (1M rounds)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Run distribution + uniqueness tests
+        run: pnpm --filter @pf/rng-core test:stat
+        timeout-minutes: 10
