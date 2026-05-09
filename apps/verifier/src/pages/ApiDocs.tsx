@@ -114,7 +114,7 @@ export function ApiDocs() {
           <iframe
             src={iframeSrc}
             title="OpenAPI reference"
-            className="h-[80vh] w-full rounded-b-xl border-0 bg-(--color-bg-base)"
+            className="h-[70vh] min-h-[28rem] w-full rounded-b-xl border-0 bg-(--color-bg-base) sm:h-[80vh]"
           />
         </CardBody>
       </Card>

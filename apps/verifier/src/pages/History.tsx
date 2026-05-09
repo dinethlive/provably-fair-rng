@@ -116,8 +116,8 @@ export function History() {
             </div>
           </div>
 
-          <div className="mt-8 overflow-hidden rounded-md border border-(--color-border-subtle)">
-            <table className="w-full text-sm">
+          <div className="mt-8 overflow-x-auto rounded-md border border-(--color-border-subtle)">
+            <table className="w-full min-w-[34rem] text-sm">
               <thead className="bg-(--color-bg-elevated) text-left text-xs uppercase tracking-wider text-(--color-text-tertiary)">
                 <tr>
                   <th className="px-4 py-2">#</th>

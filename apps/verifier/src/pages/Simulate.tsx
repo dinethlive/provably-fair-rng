@@ -93,8 +93,8 @@ export function Simulate() {
             right={<Badge tone="info">{rows.length} rounds</Badge>}
           />
           <CardBody>
-            <div className="max-h-[28rem] overflow-y-auto rounded-md border border-(--color-border-subtle)">
-              <table className="w-full text-sm">
+            <div className="max-h-[28rem] overflow-auto rounded-md border border-(--color-border-subtle)">
+              <table className="w-full min-w-[24rem] text-sm">
                 <thead className="sticky top-0 bg-(--color-bg-elevated) text-left text-xs uppercase tracking-wider text-(--color-text-tertiary)">
                   <tr>
                     <th className="px-4 py-2">Nonce</th>

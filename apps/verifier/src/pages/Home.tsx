@@ -4,16 +4,16 @@ import { Badge, Card, CardBody, CardHeader } from '../components/ui.tsx';
 
 export function Home() {
   return (
-    <div className="space-y-12">
+    <div className="space-y-10 sm:space-y-12">
       <section className="grid gap-8 lg:grid-cols-[2fr_1fr]">
         <div>
           <Badge tone="success">HMAC-SHA256 · Client-side</Badge>
-          <h1 className="mt-5 text-4xl font-semibold leading-[1.1] tracking-tight text-(--color-text-primary) sm:text-5xl">
+          <h1 className="mt-5 text-3xl font-semibold leading-[1.05] tracking-tight text-(--color-text-primary) sm:text-4xl lg:text-5xl">
             Verify any game outcome
             <br />
             <span className="text-(--color-accent)">from first principles.</span>
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-(--color-text-secondary)">
+          <p className="mt-5 max-w-2xl text-sm leading-relaxed text-(--color-text-secondary) sm:text-base">
             This tool reproduces the engine's computation on your device. No login, no API call,
             no trust in the operator. The same library the operator runs on the server runs here
             in your browser, paste in the seeds and nonce, see the result.
@@ -21,13 +21,13 @@ export function Home() {
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <Link
               to="/verify"
-              className="inline-flex items-center gap-2 rounded-md bg-(--color-accent) px-5 py-2.5 text-sm font-medium text-(--color-bg-base) transition hover:bg-(--color-accent-strong)"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-md bg-(--color-accent) px-5 py-2.5 text-sm font-medium text-(--color-bg-base) transition active:scale-[0.98] hover:bg-(--color-accent-strong)"
             >
               Verify a round →
             </Link>
             <Link
               to="/simulate"
-              className="inline-flex items-center gap-2 rounded-md border border-(--color-border-strong) bg-(--color-bg-elevated) px-5 py-2.5 text-sm font-medium text-(--color-text-primary) transition hover:bg-(--color-bg-elevated)/80"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-md border border-(--color-border-strong) bg-(--color-bg-elevated) px-5 py-2.5 text-sm font-medium text-(--color-text-primary) transition active:scale-[0.98] hover:bg-(--color-bg-elevated)/80"
             >
               Run a simulation
             </Link>
