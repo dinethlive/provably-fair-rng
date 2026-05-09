@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Provably Fair RNG, API reference</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #06080d;
+      }
+    </style>
+  </head>
+  <body>
+    <script id="api-reference"></script>
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var url = params.get('url') || 'http://localhost:3000/openapi.json';
+        document.getElementById('api-reference').dataset.url = url;
+        document.getElementById('api-reference').dataset.configuration = JSON.stringify({
+          theme: 'purple',
+          darkMode: true,
+          layout: 'modern',
+          hideClientButton: false,
+          metaData: {
+            title: 'Provably Fair RNG, API',
+            description:
+              'Operational and regulatory endpoints for the Provably Fair RNG engine. Authenticated via X-API-Key header.',
+          },
+        });
+      })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+  </body>
+</html>
