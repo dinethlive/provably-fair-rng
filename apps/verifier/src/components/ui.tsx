@@ -22,9 +22,9 @@ export function Card(props: { children: ReactNode; className?: string }) {
 
 export function CardHeader(props: { title: string; subtitle?: string; right?: ReactNode }) {
   return (
-    <header className="flex items-start justify-between gap-4 border-b border-(--color-border-subtle) px-6 py-5">
-      <div>
-        <h2 className="text-lg font-semibold leading-tight text-(--color-text-primary)">
+    <header className="flex flex-wrap items-start justify-between gap-3 border-b border-(--color-border-subtle) px-4 py-4 sm:flex-nowrap sm:gap-4 sm:px-6 sm:py-5">
+      <div className="min-w-0">
+        <h2 className="text-base sm:text-lg font-semibold leading-tight text-(--color-text-primary)">
           {props.title}
         </h2>
         {props.subtitle ? (
@@ -39,7 +39,9 @@ export function CardHeader(props: { title: string; subtitle?: string; right?: Re
 }
 
 export function CardBody(props: { children: ReactNode; className?: string }) {
-  return <div className={`px-6 py-6 ${props.className ?? ''}`}>{props.children}</div>;
+  return (
+    <div className={`px-4 py-5 sm:px-6 sm:py-6 ${props.className ?? ''}`}>{props.children}</div>
+  );
 }
 
 export function Label(props: { children: ReactNode; htmlFor?: string; hint?: ReactNode }) {
@@ -63,7 +65,8 @@ export function TextInput(
       {...rest}
       className={[
         'w-full rounded-md border border-(--color-border-subtle) bg-(--color-bg-base)',
-        'px-3 py-2 text-sm text-(--color-text-primary) placeholder:text-(--color-text-tertiary)',
+        // 16px font-size on mobile prevents iOS Safari's auto-zoom on focus
+        'min-h-[44px] px-3 py-2.5 text-base sm:min-h-0 sm:py-2 sm:text-sm text-(--color-text-primary) placeholder:text-(--color-text-tertiary)',
         'transition focus:border-(--color-accent) focus:outline-none',
         mono ? 'font-mono' : '',
         className ?? '',
@@ -79,7 +82,7 @@ export function Select(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
       {...rest}
       className={[
         'w-full rounded-md border border-(--color-border-subtle) bg-(--color-bg-base)',
-        'px-3 py-2 text-sm text-(--color-text-primary)',
+        'min-h-[44px] px-3 py-2.5 text-base sm:min-h-0 sm:py-2 sm:text-sm text-(--color-text-primary)',
         'transition focus:border-(--color-accent) focus:outline-none',
         className ?? '',
       ].join(' ')}
@@ -91,7 +94,8 @@ export function Button(
   props: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' },
 ) {
   const { variant = 'primary', className, ...rest } = props;
-  const base = 'inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50';
+  const base =
+    'inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 sm:min-h-0 sm:py-2';
   const styles =
     variant === 'primary'
       ? 'bg-(--color-accent) text-(--color-bg-base) hover:bg-(--color-accent-strong)'
